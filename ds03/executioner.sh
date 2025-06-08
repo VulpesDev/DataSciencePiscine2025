@@ -1,0 +1,1 @@
+cd ./ex05 && python3 ../ex00/Histogram.py && python3 ../ex01/Correlation.py && python3 ../ex02/points.py && python3 ../ex03/standardization.py && python3 ../ex04/Normalization.py && python3 ../ex05/split.py

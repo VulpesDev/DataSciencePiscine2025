@@ -1,0 +1,39 @@
+# docker-compose.yml
+
+services:
+  postgres:
+    image: postgres
+    container_name: ${POSTGRES_CONTAINER}
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/home/tvasilev/sgoinfre/postgresql/data
+    networks:
+      - db-network
+    
+  pgadmin:
+      image: dpage/pgadmin4:latest
+      container_name: pg-admin
+      restart: always
+      environment:
+        PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+        PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      ports:
+        - "4280:80"
+      volumes:
+        - pgadmin-data:/home/tvasilev/sgoinfre/pgadmin/data
+      networks:
+      - db-network
+      depends_on:
+        - postgres
+
+volumes:
+  pgdata:
+  pgadmin-data:
+networks:
+  db-network:

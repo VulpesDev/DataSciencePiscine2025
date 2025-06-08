@@ -1,0 +1,22 @@
+# docker-compose.yml
+
+services:
+  postgres:
+    image: postgres
+    container_name: ${POSTGRES_CONTAINER}
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/home/tvasilev/sgoinfre/postgresql/data
+    networks:
+      - db-network
+    
+volumes:
+  pgdata:
+networks:
+  db-network:
